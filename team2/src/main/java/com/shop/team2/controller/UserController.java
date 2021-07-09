@@ -310,9 +310,9 @@ public class UserController {
 				+ "            <p> &nbsp;&nbsp;&nbsp;&nbsp;<strong style=\"font-size: large;\">"+ UserName +"</strong>회원님의 임시 비밀번호는 \r\n"
 				+ "                <strong style=\"font-size: large;\">" + pw + "</strong> 입니다</p>";
 		/* 받는사람 */
-		String from = Useremail;
-		/* 보내는사람 */
-		String to = "whdrnr4873@naver.com";
+		String to = Useremail;
+		/* 보내는사람 테스트 할시  이부분 자기메일로  수정해야합니다.*/
+		String from = "whdrnr4873@naver.com";
 
 		try {
 			final MimeMessagePreparator preparator = new MimeMessagePreparator() {
