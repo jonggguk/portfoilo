@@ -1,0 +1,12 @@
+CREATE TABLE `user` (
+  `u_name` varchar(45) NOT NULL,
+  `u_id` varchar(100) NOT NULL,
+  `u_pw` varchar(100) NOT NULL,
+  `u_phone` varchar(20) NOT NULL,
+  `u_jumin` varchar(13) NOT NULL,
+  `u_email` varchar(100) DEFAULT NULL,
+  `u_address` varchar(100) DEFAULT NULL,
+  `u_point` int DEFAULT '0',
+  `u_grade` varchar(10) DEFAULT '일반회원',
+  PRIMARY KEY (`u_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
