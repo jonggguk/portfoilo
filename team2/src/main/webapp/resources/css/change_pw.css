@@ -1,0 +1,221 @@
+@charset "EUC-KR";
+
+:root{
+  --text-color: #f0f4f5;
+  --background-color: rgb(82, 128, 172);
+  --accent-color: #ffcdd2;
+}
+*{
+  list-style: none;
+  text-decoration: none;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+#wrap{
+  width: 1240px;
+  margin: 0 auto;
+}	
+
+		
+/*---------- 헤더 -----------*/
+.top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+  background-color: rgb(82, 128, 172);
+}
+.top__list{
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+.top__list li{
+  padding: 8px 12px;
+}
+
+.top li a{
+  color: var(--text-color);
+}
+
+
+.top__search{
+  display: flex;
+  padding-left: 8px;
+}
+.top__search li{
+  padding-left: 8px;
+}
+
+.logo{
+  display: flex;
+  justify-content: center;
+  background-color: #faf7f2;
+}
+.logo img{
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+		
+/* 	--------- 메뉴바 --------- */
+        #nav {
+            height: 50px;
+            padding: 0 50px;
+        }
+
+        .menu {
+          
+        	margin-left: 10px;
+       	width: auto;
+        
+            width: 1240px;
+            margin: 0 ;
+        }
+
+        .menu p {
+            width: 150px;
+            text-align: center;
+            display: inline-block;
+        
+        }
+      ul p{
+            width: 150px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .menu p a {
+			font-family: "Aclonica", sans-serif;
+            font-weight: bold;
+            font-size: 15px;
+            color: #444;
+            text-decoration: none;
+        }
+        ul p a {
+			font-family: "Aclonica", sans-serif;
+            font-weight: bold;
+            font-size: 15px;
+            text-decoration: none;
+          
+        }
+
+        .menu p a:hover {
+			font-family: "Aclonica", sans-serif;
+            font-size: 16px;
+            font-weight: bolder;
+            color:  rgb(31, 95, 212);
+            transition: 0.3s;
+        }
+        ul li p a:hover {
+        	font-family: "Aclonica", sans-serif;
+            font-size: 16px;
+            font-weight: bolder;
+            color:  rgb(31, 95, 212);
+            transition: 0.3s;
+        }
+       ul, li {
+            list-style:none;
+            margin:0;
+            padding:0;
+        }
+       
+        ul.myMenu > li {
+            display:inline-block;
+            width:110px;
+            padding:0 10px;
+            position:relative;
+            margin-left: 10px;
+        }
+      
+        ul.myMenu > li ul.submenu {
+            display:none;
+            position:absolute;
+		}
+        ul.myMenu > li:hover ul.submenu {
+            display:block;
+        }
+        ul.myMenu > li ul.submenu > li {
+        	font-family: "Aclonica", sans-serif;
+            display:inline-block;
+            width:150px;
+            padding:0 8px;
+            background: lightgray;
+            opacity: 0.8;
+            border:1px solid rgb(245, 245, 245);
+            border-radius: 2px;
+           
+        }
+        ul.myMenu > li ul.submenu > li:hover {
+            background: rgb(253,253,253);
+        }
+      
+       a {
+            text-decoration: none;
+            color: black;
+        }
+        
+ table.type09 {
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+
+}
+table.type09 thead th {
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #369;
+  border-bottom: 3px solid #036;
+}
+table.type09 tbody th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+  background: #f3f6f7;
+}
+table.type09 td {
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+
+.logout :hover{
+		background-color:  #1bc8f3;
+		color: white;
+}
+
+.mybtn2 {
+cursor: pointer;
+font-family: 'Do Hyeon', sans-serif;
+width : 120px;
+border: 0;
+font-size: 15px;
+cursor: pointer;
+border-radius: 10px;
+height: 30px;
+}
+.mybtn2:hover{
+color: white;
+ background: #1bc8f3;
+}
+   
+		
+		/*--------- 푸터 ---------- */
+		.info1{
+  background-color: #ddd;
+  padding: 20px;
+  display: flex;
+  align-items: top;
+  justify-content: space-around;
+  columns: #424242;
+}
+
+	

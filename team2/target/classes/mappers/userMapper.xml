@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.userMapper">
+
+	<!-- 회원가입 -->
+	<insert id="signup">
+		INSERT INTO
+		USER(U_NAME,U_ID,U_PW,U_PHONE,U_JUMIN,U_EMAIL,U_ADDRESS)
+		VALUES(#{u_name}, #{u_id}, #{u_pw},
+		#{u_phone},#{u_jumin},#{u_email},#{u_address})
+	</insert>
+
+	<!--유저의 정보 -->
+	<select id="showUser" resultType="userDto">
+		SELECT
+		U_NAME,U_ID,U_PW,U_PHONE,U_JUMIN,U_EMAIL,U_ADDRESS,U_POINT,U_GRADE
+		FROM USER WHERE U_ID = #{u_id}
+	</select>
+	
+	<!--유저의 정보 -->
+	<select id="readUser" resultType="userDto">
+		SELECT
+		U_NAME,U_ID,U_PW,U_PHONE,U_JUMIN,U_EMAIL,U_ADDRESS,U_POINT,U_GRADE
+		FROM USER WHERE U_ID = #{u_id}
+	</select>
+	
+	
+	<!-- 로그인 -->
+	<select id="loginOk" resultType="userDto">
+		select * from user where u_id =
+		#{u_id} and u_pw = #{u_pw}
+	</select>
+	
+	
+	<!-- 아이디 중복 확인 -->
+	<select id="idCheck" resultType="userDto">
+		SELECT U_ID FROM USER WHERE U_ID
+		= #{u_id}
+	</select>
+	
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteUser">
+		DELETE FROM USER WHERE u_id =#{u_id} and u_pw =#{u_pw}
+	</delete>
+	
+	
+	<!-- 회원 정보수정 -->
+	<update id="updateUser">
+		UPDATE USER SET U_PHONE = #{u_phone} ,u_email = #{u_email}, u_address =
+		#{u_address} WHERE U_ID =#{u_id}
+	</update>
+	
+	
+	<!-- 회원 비밀번호 변경 -->
+	<update id="changeOk">
+		UPDATE USER SET U_PW = #{u_pw} WHERE U_ID = #{u_id}
+	</update>
+	
+	<!-- 임시 비밀번호 변경에 필요한 mapper
+	이메일로 임시 번호 보내고 그걸로 변경 하는것! -->
+	<update id="updatePw" parameterType="userDto">
+		update user set u_pw = #{u_pw} where u_id = #{u_id}
+	</update>
+
+</mapper>
