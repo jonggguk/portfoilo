@@ -1,4 +1,4 @@
-# portfoilo
+# portfoilo (현재 추가 작업중)
 내가 맡은 기능 구현 설명 
 spring mvc 
 ★★★네이버 메일 관리는 root-context.xml 자신의 네이버 계정으로 테스트 해야한다★★★
