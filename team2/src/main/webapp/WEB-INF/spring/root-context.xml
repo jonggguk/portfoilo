@@ -17,9 +17,9 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/team2_db?allowPublicKeyRetrieval=true"></property>
-		<property name="username" value="team2"></property>
-		<property name="password" value="1234"></property>
+		<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/team2_db?allowPublicKeyRetrieval=true"></property> <!-- 자신의 스키마 주소  -->
+		<property name="username" value="team2"></property> <!-- 자신의 db 아이디 -->
+		<property name="password" value="1234"></property> <!-- 자신의 db 비밀번호  -->
 	</bean>
 
 	<!-- mybatis SqlSessionFactoryBean -->
