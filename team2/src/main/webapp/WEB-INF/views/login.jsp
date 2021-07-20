@@ -40,7 +40,7 @@
           <a class="submit" align="center" onClick="click_login()">로그인</a> <br>            
           <p class="forgot" align="center">
           <input type="checkbox" name="loginChk" value="true" >로그인 상태 유지 &nbsp;&nbsp;&nbsp;&nbsp; 
-          <a href="findPw">비밀번호찾기  </a> &nbsp;&nbsp;&nbsp;&nbsp; 
+       <!--    <a href="findPw" >비밀번호찾기  </a> &nbsp;&nbsp;&nbsp;&nbsp;   -->
           <a href="go_to_signup">회원 가입 하기</a> 
           </p>
           </form>

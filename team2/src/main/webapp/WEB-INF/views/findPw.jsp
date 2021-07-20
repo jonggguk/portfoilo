@@ -43,7 +43,7 @@
         <p class="result" style="margin-left: 250px">
 		<span class="msg" ></span></p>
 		<br>
-        <p class="result2" style="margin-left: 190px">
+        <p class="result2" style="margin-left: 220px">
 		<span class="msg2" ></span></p>
 		<br> 
         
@@ -122,9 +122,8 @@ $("#btn").click(function(){
 });
 $("#btn2").click(function (){
 	 var u_id = $("#u_id").val(); console.log(u_id);
-			 $(".result2 .msg2").text("  잠시만 기다려 주세요 !");
+			 $(".result2 .msg2").text("잠시만 기다려 주세요 !");
 			 $(".result2 .msg2").attr("style", "color:#00f");
-			 $(".result2 .msg2").attr("margin-left:230px");
 	form.submit();
 	
 }) 

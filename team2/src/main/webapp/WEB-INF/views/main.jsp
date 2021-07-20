@@ -77,7 +77,7 @@ if (c != null) {
         	<% 
         }
         %>
-          <li><a href="#">JOIN</a></li>
+          <li><a href="/team2/notice/list">JOIN</a></li>
           <li><a href="mypage">MY PAGE</a></li>
           <li><a href="cart">CART</a></li>
         </ul>
