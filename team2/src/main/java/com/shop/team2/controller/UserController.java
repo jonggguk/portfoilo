@@ -1,6 +1,6 @@
 package com.shop.team2.controller;
 
-import java.io.File;
+
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
+
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -22,7 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shop.team2.dto.UserDto;
@@ -33,6 +33,7 @@ import myUtil.HanConv;
 @Controller
 
 public class UserController {
+	
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -75,6 +76,7 @@ public class UserController {
 	public String findPw() throws Exception {
 		return "findPw";
 	}
+	
 
 	/* ================== 기능 구현 부분 ================= */
 
@@ -287,32 +289,32 @@ public class UserController {
 			}
 			userDto.setU_pw(pw);
 			service.updatePw(userDto);
-			
+
 		}
- 
-		
+
 		return re;
 	}
 
-	// 메일보내기 네이버에 가입되어있는 아이디 
+	// 메일보내기 네이버에 가입되어있는 아이디
 	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
 	public String sendMail(HttpServletRequest request, UserDto userDto) throws Exception {
 		String u_id = request.getParameter("u_id");
 		UserDto user = service.readUser(u_id);
-		String UserName =user.getU_name();
+		String UserName = user.getU_name();
 		String Useremail = user.getU_email();
-		
+
 		/* 메일제목 */
 		String subject = "Mood On 임시비밀번호 안내";
 		/* 메일내용 이미지쪽 에러 = 해당이미지가 없어서 그러니 img 태그를 지워주시면 됩니다 기능과는 상관없음 */
-		String content = "    <img src=\"//whdrnr4873.ivyro.net/logo.jpg\" alt=\"\">\r\n"
+		String content = "    <img src=\"D:/logo.jpg\" alt=\"\">\r\n"
 				+ "        <h1 style=\"color: cornflowerblue;\"> Mood On 임시 비밀번호 안내 입니다</h1>\r\n"
-				+ "            <p> &nbsp;&nbsp;&nbsp;&nbsp;<strong style=\"font-size: large;\">"+ UserName +"</strong>회원님의 임시 비밀번호는 \r\n"
-				+ "                <strong style=\"font-size: large;\">" + pw + "</strong> 입니다</p>";
+				+ "           <br><p style=\"margin-left: 50px;\"> " + UserName + "</strong>회원님의 임시 비밀번호는 \r\n"
+				+ "                <strong style=\"font-size: large;\">" + pw + "</strong> 입니다</p>"
+				+ "<a href=\"http://192.168.0.89:8183/team2/login\" style=\"margin-left: 100px;\">로그인 바로가기 </a>";
 		/* 받는사람 */
-		String to = Useremail;
-		/* 보내는사람 테스트 할시  이부분 자기메일로  수정해야합니다.*/
-		String from = "whdrnr4873@naver.com";
+		String from = Useremail;
+		/* 보내는사람 */
+		String to = "whdrnr4873@naver.com";
 
 		try {
 			final MimeMessagePreparator preparator = new MimeMessagePreparator() {
@@ -323,14 +325,15 @@ public class UserController {
 					mailHelper.setFrom(from);
 					mailHelper.setTo(to);
 					mailHelper.setSubject(subject);
-					mailHelper.setText(content, true); 
-					// 파일 보낼시 압축 파일도 가능함 
-					//FileSystemResource file = new FileSystemResource(new File("D:\\Weekly Best Item.zip"));
-					//mailHelper.addAttachment("Weekly Best Item.zip", file);
-					
-					
-					FileSystemResource file = new FileSystemResource(new File("D:\\MoodOn.txt"));
-					mailHelper.addAttachment("MoodOn.txt", file);
+					mailHelper.setText(content, true);
+					// 파일 보낼시 압축 파일도 가능함
+					// FileSystemResource file = new FileSystemResource(new File("D:\\Weekly Best
+					// Item.zip"));
+					// mailHelper.addAttachment("Weekly Best Item.zip", file);
+
+					// FileSystemResource file = new FileSystemResource(new File("D:\\MoodOn.txt"));
+					// mailHelper.addAttachment("MoodOn.txt", file);
+					 
 				}
 
 			};
@@ -339,7 +342,7 @@ public class UserController {
 			e.printStackTrace();
 			System.out.println("수신자 설정 해주세요 !");
 		}
-		 pw="";
+		pw = "";
 		return "redirect:login";
 
 	}
