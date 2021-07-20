@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.cartMapper">
+	<select id="cartList" resultType="cartDto">
+	SELECT C.C_CODE, C.U_ID, C.ITEM_NUMBER, I.ITEM_NAME, C.C_OPTION1, C.C_OPTION2, C.C_QTY, C.C_PRICE 
+	,(SELECT REMAINS FROM OPTIONS WHERE ITEM_NUMBER = C.ITEM_NUMBER AND OPTION1 = C.C_OPTION1 AND OPTION2 =C.C_OPTION2) "remains"
+	FROM CART C JOIN ITEMS I
+	ON C.ITEM_NUMBER = I.ITEM_NUMBER WHERE C.U_ID = #{u_id} AND C.C_TO_NEXT = 0 ORDER BY C.C_CODE
+	</select>
+	
+	<delete id="cartDelete">
+	DELETE FROM CART WHERE C_CODE = #{c_code}
+	</delete>
+	
+	<select id="cartSelectOrder" resultType="cartDto">
+	SELECT C.C_CODE, C.ITEM_NUMBER, I.ITEM_NAME, C.C_OPTION1, C.C_OPTION2, C.C_QTY, C.C_PRICE FROM CART C JOIN ITEMS I
+	ON C.ITEM_NUMBER = I.ITEM_NUMBER WHERE C.C_CODE IN 
+	<foreach collection="array" item="select_cart_no" open="(" close=")" separator=",">
+ 	#{select_cart_no}
+	</foreach>
+	ORDER BY C.C_CODE
+	</select>
+	
+	<update id="updateQty" parameterType="hashMap">
+		UPDATE CART SET C_QTY=#{c_qty} WHERE C_CODE = #{c_code}
+	</update>
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.team2.mappers.faq">
+
+	<!-- 게시물 목록 -->
+	<select id="list" resultType="com.shop.team2.dto.FaqDto">
+		SELECT F_NUM, F_CATEGORY, F_TITLE, F_CONTENT, U_ID
+			FROM FAQ
+			ORDER BY F_NUM DESC 
+	</select>
+	
+	<!-- 게시물 작성 -->
+	<insert id="write" parameterType="com.shop.team2.dto.FaqDto">
+		INSERT INTO 
+			FAQ(F_CATEGORY, F_TITLE, F_CONTENT, U_ID)
+			VALUES(#{f_category}, #{f_title},#{f_content}, #{u_id}) 
+	</insert>
+	
+	<!-- 게시물 조회 -->
+	<select id="view" parameterType="int" resultType="com.shop.team2.dto.FaqDto">
+		 SELECT F_NUM, F_CATEGORY, F_TITLE, F_CONTENT, U_ID
+		 	FROM FAQ 
+		 	WHERE F_NUM = #{f_num} 			
+	</select>
+
+	<!-- 게시물 수정 -->
+	<update id="modify" parameterType="com.shop.team2.dto.FaqDto" >
+		UPDATE FAQ 
+			SET F_NUM = #{f_num}, 
+				F_TITLE = #{f_title}, 
+				F_CATEGORY = #{f_category}, 
+				F_CONTENT = #{f_content}
+			WHERE F_NUM = #{f_num}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delete" parameterType="int">
+		 DELETE 
+		 	FROM FAQ 
+		 	WHERE F_NUM = #{f_num}
+	</delete>
+	
+	
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="count" resultType="int">
+		select count(f_num) from faq
+	</select>
+	
+	
+	
+	<!-- 게시물 목록 + 페이징 -->
+	<select id="listPage" parameterType="hashMap" resultType="com.shop.team2.dto.FaqDto">
+		select
+			f_num, f_title, u_id, f_date
+		from faq
+		order by f_num desc
+			limit #{displayPost}, #{postNum}
+	</select>	
+	
+	
+	
+	<!-- 게시물 목록 + 페이징 + 검색 -->
+	<select id="listPageSearch" parameterType="hashMap" resultType="com.shop.team2.dto.FaqDto">
+		select
+			f_num, f_title, u_id, f_date
+		from faq
+		
+		<if test='searchType.equals("title")'>
+			WHERE f_title LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("content")'>
+			WHERE f_content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("title_content")'>
+			WHERE f_title LIKE concat('%', #{keyword}, '%') 
+				or f_content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("writer")'>
+			WHERE u_id LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		order by f_num desc
+			limit #{displayPost}, #{postNum}
+	</select>	
+	
+	<!-- 게시물 총 갯수 + 검색 적용 -->
+	<select id="searchCount" parameterType="hashMap" resultType="int">
+		select count(f_num) from faq		
+			
+		<if test='searchType.equals("title")'>
+			WHERE f_title LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("content")'>
+			WHERE f_content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("title_content")'>
+			WHERE f_title LIKE concat('%', #{keyword}, '%') 
+				or f_content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("writer")'>
+			WHERE u_id LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+	</select>
+	
+	
+</mapper>

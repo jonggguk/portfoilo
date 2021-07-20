@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.team2.mappers.notice">
+
+	<!-- 게시물 목록 -->
+	<select id="list" resultType="com.shop.team2.dto.NoticeDto">
+		SELECT N_NUM, N_TITLE, N_CONTENT, N_DATE, U_ID
+			FROM NOTICE
+			ORDER BY N_NUM DESC
+	</select>
+	
+	<!-- 게시물 작성 -->
+	<insert id="write" parameterType="com.shop.team2.dto.NoticeDto">
+		INSERT INTO 
+			NOTICE(N_TITLE, N_CONTENT, U_ID)
+			VALUES(#{n_title}, #{n_content}, #{u_id}) 
+	</insert>
+	
+	<!-- 게시물 조회 -->
+	<select id="view" parameterType="int" resultType="com.shop.team2.dto.NoticeDto">
+		 SELECT N_NUM, N_TITLE, N_CONTENT, N_DATE, U_ID
+		 	FROM NOTICE
+		 	WHERE N_NUM = #{n_num} 
+					
+	</select>
+
+	<!-- 게시물 수정 -->
+	<update id="modify" parameterType="com.shop.team2.dto.NoticeDto" >
+			UPDATE NOTICE 
+				SET N_TITLE = #{n_title},
+					N_CONTENT = #{n_content}
+				WHERE N_NUM = #{n_num}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delete" parameterType="int">
+		 DELETE FROM NOTICE 
+		 	WHERE N_NUM = #{n_num}
+	</delete>
+	
+	
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="count" resultType="int">
+		select count(n_num) from notice
+	</select>
+	
+</mapper>

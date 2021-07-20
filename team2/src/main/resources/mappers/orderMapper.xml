@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.orderMapper">
+	<select id="userInfo" resultType="userDto">
+		SELECT U_ID, U_NAME, U_PHONE, U_ADDRESS, U_EMAIL, U_POINT, U_GRADE FROM USER WHERE U_ID = #{u_id}
+	</select>
+	
+	<insert id="orderOk" parameterType="hashmap">
+		INSERT INTO ORDERS(ORDER_NUMBER, ORDER_STATUS, ORDER_ID, ORDER_NAME, 
+				ORDER_TEL, ORDER_ADDRESS, SELL_QTY, SELL_PRICE, ORDER_DATE)
+		VALUES(#{order_number}, '결제완료', #{order_id}, #{order_name}, #{order_tel},
+				#{order_address}, #{sell_qty}, #{sell_price}, NOW())
+	</insert>
+	
+	<insert id="orderItem" parameterType="hashmap">
+		insert into order_items(order_number, item_number, item_name, item_option1, item_option2, item_qty, item_price)
+		values (#{order_number}, #{item_number}, #{item_name}, #{c_option1}, #{c_option2}, #{c_qty}, #{c_price})
+	</insert>
+</mapper>

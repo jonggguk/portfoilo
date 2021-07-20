@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.team2.mappers.review">
+
+	<!-- 게시물 목록 -->
+	<select id="list" resultType="com.shop.team2.dto.ReviewDto">
+		SELECT R_NUM, R_TITLE, R_CONTENT, R_DATE, U_ID
+			FROM REVIEW
+			ORDER BY R_NUM DESC
+	</select>
+	
+	<!-- 게시물 작성 -->
+	<insert id="write" parameterType="com.shop.team2.dto.ReviewDto">
+		 INSERT INTO 
+		 	REVIEW(R_TITLE, R_CONTENT, U_ID)
+		 	VALUES( #{r_title}, #{r_content}, #{u_id})
+	</insert>
+	
+	<!-- 게시물 조회 -->
+	<select id="view" parameterType="int" resultType="com.shop.team2.dto.ReviewDto">
+		SELECT R_NUM, R_TITLE, R_CONTENT, R_DATE, U_ID
+			FROM REVIEW 
+			WHERE R_NUM = #{r_num} 			
+	</select>
+
+	<!-- 게시물 수정 -->
+	<update id="modify" parameterType="com.shop.team2.dto.ReviewDto" >
+		UPDATE REVIEW 
+			SET 
+			R_TITLE = #{r_title},
+			R_CONTENT = #{r_content}
+			WHERE R_NUM = #{r_num}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE 
+			FROM REVIEW 
+			WHERE R_NUM = #{r_num}
+	</delete>
+	
+	
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="count" resultType="int">
+		select count(r_num) from review
+	</select>
+	
+	
+	
+	<!-- 게시물 목록 + 페이징 -->
+	<select id="listPage" parameterType="hashMap" resultType="com.shop.team2.dto.ReviewDto">
+		select
+			r_num, r_title, u_id, r_date
+		from review
+		order by r_num desc
+			limit #{displayPost}, #{postNum}
+	</select>	
+	
+	
+	
+	<!-- 게시물 목록 + 페이징 + 검색 -->
+	<select id="listPageSearch" parameterType="hashMap" resultType="com.shop.team2.dto.ReviewDto">
+		select
+			r_num, r_title, u_id , r_date
+		from review
+		
+		<if test='searchType.equals("r_title")'>
+			WHERE r_title LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("r_content")'>
+			WHERE r_content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("r_title_r_content")'>
+			WHERE r_title LIKE concat('%', #{keyword}, '%') 
+				or r_content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("u_id")'>
+			WHERE u_id LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		order by r_num desc
+			limit #{displayPost}, #{postNum}
+	</select>	
+	
+	<!-- 게시물 총 갯수 + 검색 적용 -->
+	<select id="searchCount" parameterType="hashMap" resultType="int">
+		select count(r_num) from review		
+			
+		<if test='searchType.equals("r_title")'>
+			WHERE r_title LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("r_content")'>
+			WHERE r_content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("r_title_r_content")'>
+			WHERE r_title LIKE concat('%', #{keyword}, '%') 
+				or r_content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("u_id")'>
+			WHERE u_id LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+	</select>
+	
+	
+</mapper>
