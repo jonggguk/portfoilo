@@ -11,13 +11,6 @@ public class UserDto {
 	private int u_point;
 	private String u_grade;
 
-	@Override
-	public String toString() {
-		return "UserDto [u_name=" + u_name + ", u_id=" + u_id + ", u_pw=" + u_pw + ", u_phone=" + u_phone + ", u_jumin="
-				+ u_jumin + ", u_email=" + u_email + ", u_address=" + u_address + ", u_point=" + u_point + ", u_grade="
-				+ u_grade + "]";
-	}
-
 	public String getU_email() {
 		return u_email;
 	}
