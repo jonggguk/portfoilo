@@ -36,8 +36,8 @@
         	}
         --%>
 					<li><a href="#">JOIN</a></li>
-					<li><a href="mypage.jsp">MY PAGE</a></li>
-					<li><a href="cart.html">CART</a></li>
+					<li><a href="mypage">MY PAGE</a></li>
+					<li><a href="cart">CART</a></li>
 				</ul>
 			</div>
 
