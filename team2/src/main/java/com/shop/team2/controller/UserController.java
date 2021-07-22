@@ -158,8 +158,8 @@ public class UserController {
 	/* 회원가입 */
 	@RequestMapping(value = "/signup_ok", method = RequestMethod.POST)
 	public String signup_ok(HttpServletRequest request, UserDto userDto, Model model) throws Exception {
-		String u_name = HanConv.toKor(request.getParameter("u_name"));
-		userDto.setU_name(u_name);
+//		String u_name = HanConv.toKor(request.getParameter("u_name"));
+//		userDto.setU_name(u_name);
 
 		// 번호 3개를 입력받아 하나로 합쳐준다
 		String phone1 = request.getParameter("phone1");
@@ -169,7 +169,7 @@ public class UserController {
 		// 주소도 전부 다 받아와서 합쳐준다
 		String address = request.getParameter("postcode") + request.getParameter("roadAddress")
 				+ request.getParameter("jibunAddress") + request.getParameter("extraAddress");
-		address = HanConv.toKor(address);
+//		address = HanConv.toKor(address);
 		userDto.setU_address(address);
 
 		service.signup(userDto);
